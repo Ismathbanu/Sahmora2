@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+@theme {
+  --color-black: #0D0D0D;
+  --color-charcoal: #111111;
+  --color-gold: #C9A467;
+  --color-gold-light: #D9BE8B;
+  --color-gold-dark: #B08D4F;
+  --color-cream: #F5F0E7;
+  --color-offwhite: #FAFAF7;
+  --color-ink: #1A1A1A;
+  --color-graytext: #8A8A8A;
+  --color-white: #FFFFFF;
+
+  --font-heading: "Playfair Display", serif;
+  --font-body: "Inter", sans-serif;
+}
+
+/* Global Reset */
+html, body {
+  @apply font-body text-graytext bg-black antialiased;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading text-white font-normal leading-tight tracking-tight;
+  }
+}
+
+.eyebrow {
+  @apply text-gold text-xs tracking-[0.2em] uppercase font-semibold mb-4 block;
+}
+
+.btn-primary {
+  @apply inline-flex items-center justify-center bg-gold text-black font-semibold uppercase text-[13px] tracking-wide px-8 py-3.5 hover:bg-gold-dark transition-colors duration-300;
+}
+
+.btn-outline {
+  @apply inline-flex items-center justify-center border border-gold text-white uppercase text-[13px] tracking-wide px-8 py-3.5 hover:bg-gold hover:text-black transition-colors duration-300;
+}
+
+.btn-black {
+  @apply inline-flex items-center justify-center bg-black text-white uppercase text-[13px] tracking-wide px-8 py-4 hover:bg-ink transition-colors duration-300;
+}
+
+::selection {
+  background-color: var(--color-gold);
+  color: var(--color-black);
+}
