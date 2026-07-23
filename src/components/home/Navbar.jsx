@@ -9,12 +9,17 @@ const navLinks = [
   { title: 'About Us', path: '/about' },
   { title: 'What We Do', path: '/what-we-do' },
   { title: 'Industries We Serve', path: '/industries' },
-  { title: 'Ventures', path: '/ventures' },
+];
+
+const ventureLinks = [
+  { title: 'Talbar', path: '/ventures/talbar' },
+  { title: 'Igrade Goods LLC', path: '/ventures/igrade' },
 ];
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [venturesOpen, setVenturesOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -27,6 +32,7 @@ const Navbar = () => {
 
   useEffect(() => {
     setMobileMenuOpen(false);
+    setVenturesOpen(false);
   }, [location]);
 
   return (
@@ -83,7 +89,54 @@ const Navbar = () => {
             </NavLink>
           ))}
 
-
+          {/* Ventures Dropdown */}
+          <div
+            className="relative group"
+            onMouseEnter={() => setVenturesOpen(true)}
+            onMouseLeave={() => setVenturesOpen(false)}
+          >
+            <button
+              className={`flex items-center text-[11.5px] font-semibold font-body tracking-[0.12em] uppercase transition-colors duration-300 ${
+                location.pathname.includes('/ventures')
+                  ? 'text-[#C9A467]'
+                  : 'text-white/85 hover:text-[#C9A467]'
+              }`}
+            >
+              Ventures
+              <ChevronDown
+                className={`ml-1 w-3.5 h-3.5 transition-transform duration-300 ${
+                  venturesOpen ? 'rotate-180' : ''
+                }`}
+              />
+            </button>
+            <AnimatePresence>
+              {venturesOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: 8, scale: 0.97 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 8, scale: 0.97 }}
+                  transition={{ duration: 0.2 }}
+                  className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-52 bg-[#111111]/95 backdrop-blur-xl border border-[#C9A467]/15 shadow-2xl overflow-hidden"
+                >
+                  <Link
+                    to="/ventures"
+                    className="block px-5 py-3 text-[11px] tracking-[0.1em] uppercase text-white/70 hover:bg-[#C9A467]/10 hover:text-[#C9A467] transition-colors border-b border-white/5"
+                  >
+                    All Ventures
+                  </Link>
+                  {ventureLinks.map((link) => (
+                    <Link
+                      key={link.path}
+                      to={link.path}
+                      className="block px-5 py-3 text-[11px] tracking-[0.1em] uppercase text-white/70 hover:bg-[#C9A467]/10 hover:text-[#C9A467] transition-colors"
+                    >
+                      {link.title}
+                    </Link>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
         </nav>
 
         {/* Contact CTA Button */}
@@ -129,7 +182,42 @@ const Navbar = () => {
                   {link.title}
                 </Link>
               ))}
-
+              <div>
+                <button
+                  onClick={() => setVenturesOpen(!venturesOpen)}
+                  className="flex items-center text-[13px] font-semibold tracking-[0.12em] uppercase text-white/80 hover:text-[#C9A467] transition-colors w-full text-left"
+                >
+                  Ventures
+                  <ChevronDown
+                    className={`ml-2 w-4 h-4 transition-transform ${
+                      venturesOpen ? 'rotate-180' : ''
+                    }`}
+                  />
+                </button>
+                <AnimatePresence>
+                  {venturesOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      className="pl-5 mt-3 flex flex-col space-y-3 border-l border-[#C9A467]/20 ml-1"
+                    >
+                      <Link to="/ventures" className="text-white/60 text-[12px] tracking-[0.1em] uppercase hover:text-[#C9A467]">
+                        All Ventures
+                      </Link>
+                      {ventureLinks.map((link) => (
+                        <Link
+                          key={link.path}
+                          to={link.path}
+                          className="text-white/60 text-[12px] tracking-[0.1em] uppercase hover:text-[#C9A467]"
+                        >
+                          {link.title}
+                        </Link>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
               <Link
                 to="/contact"
                 className="mt-4 border border-[#C9A467]/60 text-[#C9A467] font-semibold text-[11px] tracking-[0.15em] uppercase px-6 py-3 text-center hover:bg-[#C9A467] hover:text-black transition-all duration-300"
