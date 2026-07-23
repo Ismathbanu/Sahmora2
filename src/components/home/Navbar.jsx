@@ -118,12 +118,7 @@ const Navbar = () => {
                   transition={{ duration: 0.2 }}
                   className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-52 bg-[#111111]/95 backdrop-blur-xl border border-[#C9A467]/15 shadow-2xl overflow-hidden"
                 >
-                  <Link
-                    to="/ventures"
-                    className="block px-5 py-3 text-[11px] tracking-[0.1em] uppercase text-white/70 hover:bg-[#C9A467]/10 hover:text-[#C9A467] transition-colors border-b border-white/5"
-                  >
-                    All Ventures
-                  </Link>
+
                   {ventureLinks.map((link) => (
                     <Link
                       key={link.path}
@@ -202,9 +197,7 @@ const Navbar = () => {
                       exit={{ opacity: 0, height: 0 }}
                       className="pl-5 mt-3 flex flex-col space-y-3 border-l border-[#C9A467]/20 ml-1"
                     >
-                      <Link to="/ventures" className="text-white/60 text-[12px] tracking-[0.1em] uppercase hover:text-[#C9A467]">
-                        All Ventures
-                      </Link>
+
                       {ventureLinks.map((link) => (
                         <Link
                           key={link.path}
